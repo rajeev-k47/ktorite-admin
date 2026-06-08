@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title th:text="${title}">Detail</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #eff1f5;
+      color: #4c4f69;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #1e66f5;
+    }
+
+    a {
+      color: #1e66f5;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e6e9ef;
+    }
+
+    th {
+      background: #e6e9ef;
+      font-weight: 600;
+      width: 200px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .btn-primary {
+      background: #1e66f5;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 th:text="${title}">Detail</h1>
+  <a th:href="@{/admin}">Home</a> | <a th:href="@{'/admin/' + ${modelName}}" class="btn">Back to list</a> | <a
+    th:href="@{'/admin/' + ${modelName} + '/' + ${pkVal} + '/edit'}" class="btn btn-primary">Edit</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="col : ${columns}">
+        <td th:text="${col}">field</td>
+        <td th:text="${row[col]}">value</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

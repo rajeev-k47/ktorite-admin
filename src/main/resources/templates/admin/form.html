@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title th:text="${title}">Form</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #eff1f5;
+      color: #4c4f69;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #1e66f5;
+    }
+
+    a {
+      color: #1e66f5;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      max-width: 600px;
+    }
+
+    label {
+      display: block;
+      margin: 0.75rem 0 0.25rem;
+      font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.4rem;
+      border: 1px solid #bcc0cc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    .error {
+      color: #d20f39;
+      background: #fbe9e7;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #1e66f5;
+      color: #fff;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 th:text="${title}">Form</h1>
+  <a th:href="@{'/admin/' + ${modelName}}">Back to list</a>
+  <div class="error" th:if="${error != null}" th:text="${error}">error</div>
+  <form method="post" th:action="${action}">
+    <input type="hidden" name="csrf_token" th:value="${csrfToken}">
+    <div th:each="field : ${fields}">
+      <label th:for="${field.name}" th:text="${field.name}">field</label>
+      <input th:if="${field.type == 'text' or field.type == 'number' or field.type == 'decimal'}"
+        th:type="${field.type}" th:name="${field.name}" th:value="${field.value}" th:readonly="${field.readonly}">
+      <textarea th:if="${field.type == 'textarea'}" th:name="${field.name}" th:readonly="${field.readonly}"
+        th:text="${field.value}"></textarea>
+      <select th:if="${field.type == 'boolean'}" th:name="${field.name}" th:disabled="${field.readonly}">
+        <option value="true" th:selected="${field.value == true}">True</option>
+        <option value="false" th:selected="${field.value == false or field.value == null}">False</option>
+      </select>
+    </div>
+    <div style="margin-top:1rem">
+      <button type="submit" th:if="${isEdit}" class="btn btn-primary">Update</button>
+      <button type="submit" th:unless="${isEdit}" class="btn btn-primary">Create</button>
+    </div>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ktorite Admin</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #eff1f5;
+      color: #4c4f69;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #1e66f5;
+    }
+
+    a {
+      color: #1e66f5;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .btn-primary {
+      background: #1e66f5;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Ktorite Admin</h1>
+  <p>Welcome to the admin panel. <a th:href="@{/admin}">Home</a></p>
+  <form method="post" action="/logout" style="display:inline"><button type="submit"
+      class="btn btn-primary">Logout</button></form>
+  <h2>Models</h2>
+  <div th:each="model : ${models}" class="card">
+    <a th:href="@{'/admin/' + ${model.tableName.toLowerCase()}}" th:text="${model.tableName}">model</a>
+  </div>
+  <p th:if="${modelCount == 0}">No models registered.</p>
+</body>
+
+</html>
