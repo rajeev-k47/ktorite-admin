@@ -25,7 +25,6 @@ publishing {
 }
 
 dependencies {
-    api("com.github.ktorite:ktorite-core:1.0.0")
     api("io.ktor:ktor-server-core:3.5.0")
     api("io.ktor:ktor-server-thymeleaf:3.5.0")
     api("io.ktor:ktor-server-sessions:3.5.0")
